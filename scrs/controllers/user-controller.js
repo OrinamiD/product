@@ -8,7 +8,7 @@ import forgotPasswordEmail from "../mail/forgot-password.js";
 
 export const signup = async (req, res) => {
   try {
-    const { firstName, lastName, email, password } = req.body;
+    const { firstName, lastName, email, password, role } = req.body;
 
     if (!firstName) {
       return res.status(400).json({ message: "FirstName is required" });
@@ -21,6 +21,9 @@ export const signup = async (req, res) => {
     }
     if (!password) {
       return res.status(400).json({ message: "password is required" });
+    }
+    if (!role) {
+      return res.status(400).json({ message: "role is required" });
     }
 
     const user = await User.findOne({ email });
@@ -44,6 +47,7 @@ export const signup = async (req, res) => {
       password: hashPassword,
       otp: otp,
       expiredAt: new Date(Date.now() + 5 * 60 * 1000),
+      role,
     });
 
     await newUser.save();

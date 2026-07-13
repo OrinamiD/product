@@ -1,5 +1,5 @@
 import express from "express";
-import { validateProduct } from "../middleware/product-middleware.js";
+import { isAdmin, validateProduct } from "../middleware/product-middleware.js";
 import { auth } from "../middleware/auth-middleware.js";
 import {
   createProduct,
@@ -8,7 +8,8 @@ import {
 
 const router = express.Router();
 
-router.post("/create", validateProduct, auth, createProduct);
+router.post("/create", validateProduct, isAdmin, auth, createProduct);
+
 router.get("/get-all/:id", auth, getAllProduct);
 
 export default router;

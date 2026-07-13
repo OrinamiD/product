@@ -27,6 +27,11 @@ const usercSchema = new mongoose.Schema(
     isverified: {
       type: Boolean,
     },
+    role: {
+      type: String,
+      enums: ["admin", "user"],
+      default: "user",
+    },
 
     expiredAt: Date,
   },

@@ -1,8 +1,11 @@
 export const validateProduct = async (req, res, next) => {
-  const { productName, quantity, price, amount, id } = req.body;
+  const { id, role, productName, quantity, price, amount } = req.body;
 
   if (!id) {
     return res.status(400).json({ message: "id is required" });
+  }
+  if (!role) {
+    return res.status(400).json({ message: "role is required" });
   }
 
   if (!productName) {
@@ -21,10 +24,16 @@ export const validateProduct = async (req, res, next) => {
 };
 
 export const isAdmin = async (req, res, next) => {
-  const { role } = req;
+  try {
+    const { role } = req.body;
 
-  if (req.role === "Admin") {
-    next();
+    if (req.role === "admin") {
+      next();
+    } else {
+      return res.status(402).json({ message: "You are not allowed" });
+    }
+    console.log(req.role);
+  } catch (error) {
+    console.log(error.message);
   }
-  return res.status(402).json({ message: "You are not allowed" });
 };
