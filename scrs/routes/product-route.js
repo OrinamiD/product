@@ -10,6 +10,6 @@ const router = express.Router();
 
 router.post("/create", validateProduct, isAdmin, auth, createProduct);
 
-router.get("/get-all/:id", auth, getAllProduct);
+router.get("/get-all", auth, getAllProduct);
 
 export default router;

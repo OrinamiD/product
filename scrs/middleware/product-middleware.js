@@ -1,9 +1,9 @@
 export const validateProduct = async (req, res, next) => {
   const { id, role, productName, quantity, price, amount } = req.body;
 
-  if (!id) {
-    return res.status(400).json({ message: "id is required" });
-  }
+  // if (!id) {
+  //   return res.status(400).json({ message: "id is required" });
+  // }
   if (!role) {
     return res.status(400).json({ message: "role is required" });
   }
